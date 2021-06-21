@@ -1,0 +1,82 @@
+package test;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JOptionPane;
+import java.sql.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import test.Database;
+import test.hastalogin;
+import test.login;
+import test.sekreterlogin;
+
+public class firstlogin extends javax.swing.JFrame {
+
+    Connection conn = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null;
+
+    public firstlogin() {
+    
+        initComponents();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        this.setSize(1125, 800);
+        setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
+        conn = Database.java_db();
+
+        currentDate();
+    }
+
+    public void currentDate() {
+    
+        Calendar cal = new GregorianCalendar();
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        lbl_date.setText((month + 1) + "/" + (day) + "/" + (year));
+
+        int second = cal.get(Calendar.SECOND);
+        int minute = cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR);
+
+        lbl_time.setText((hour) + ":" + (minute) + ":" + (second));
+
+    }
+
+    @SuppressWarnings("unchecked")
+    
+     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        this.setVisible(false);
+        new login().setVisible(true);
+    }   
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        this.setVisible(false);
+        new hastalogin().setVisible(true);
+    }                                        
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        System.exit(1);
+    }                                        
+
+    public static void main(String args[]) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new firstlogin().setVisible(true);
+            }
+        });
+    }
+    
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu lbl_date;
+    private javax.swing.JMenu lbl_time;
