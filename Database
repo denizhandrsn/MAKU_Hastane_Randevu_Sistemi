@@ -1,0 +1,25 @@
+package test;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.sql.*;
+import javax.swing.JOptionPane;
+
+public class Database {
+
+    Connection conn = null;
+
+    public static Connection java_db() {
+
+        try {
+
+            Class.forName("org.sqlite.JDBC");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\NUSRET\\Desktop\\projedenemesi1\\mydatabase.sqlite"); // enter your own path to database
+            return conn;
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+            return null;
+        }
+    }
+}
